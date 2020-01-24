@@ -1,0 +1,46 @@
+<table class="parentWidth" cellspacing=0>
+    <thead>
+        <tr>
+            <th>
+                Events & Activities
+            </th>
+            <th *ngFor = "let weekdisplay of totalWeek['weekDays']">
+                {{weekdisplay['day']}}
+            </th>
+        </tr>
+        <tr class="noBorder">
+            <th>
+                &nbsp;
+            </th>
+            <th *ngFor = "let weekdisplay of totalWeek['weekDays']">
+                {{weekdisplay['date']}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let listEvents of events">
+            <td colspan=10>
+                <table cellspacing=0>
+                    <tbody class="subElements hide" (click)="toggleSubElements()">
+                        <tr>
+                            <td>{{listEvents["events"]}}</td>
+                            <td *ngFor="let day of listEvents['days']" class="{{day}}">&nbsp;</td>
+                        </tr>
+                        <tr *ngIf="listEvents['subElements']" class="subElements">
+                            <td colspan=10>
+                                <table cellspacing=0>
+                                    <tbody>
+                                        <tr *ngFor="let subelements of listEvents['subElements']">
+                                            <td>{{subelements["events"]}}</td>
+                                            <td *ngFor="let day of subelements['days']" class="{{day}}">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,63 @@
+$firstchildwidth: 30%;
+$generalwidth: 10%;
+table{
+    width: 100%;
+    thead{
+        tr{
+            th{
+                min-width: $generalwidth;
+                text-align: left;
+                &:first-child{
+                    min-width: $firstchildwidth;
+                    width: $firstchildwidth;
+                }
+            }
+        }
+    }
+    tbody{
+        tr{
+            &.subElements{
+                td{
+                    &:first-child{
+                        padding-left: 10px;
+                    }
+                }
+            }
+            td{
+                position: relative;                
+                min-width: $generalwidth;
+                text-align: left;
+                &:first-child{
+                    min-width: $firstchildwidth;
+                    width: $firstchildwidth;
+                }
+                &.eventActive{
+                    &:after{
+                        background: #cdcdcd;
+                        content: "";
+                        width: 100%;
+                        height: 100%;
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                    }
+                    &.last{
+                        &:after{
+                            border-radius: 0px 3px 3px 0px;   
+                        }
+                    }
+                }
+                &:not(.eventActive){
+                    & + .eventActive{
+                        &:after{
+                            border-radius: 3px 0px 0px 3px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
