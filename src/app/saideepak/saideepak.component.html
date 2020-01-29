@@ -1,46 +1,184 @@
-<table class="parentWidth" cellspacing=0>
-    <thead>
-        <tr>
-            <th>
-                Events & Activities
-            </th>
-            <th *ngFor = "let weekdisplay of totalWeek['weekDays']">
-                {{weekdisplay['day']}}
-            </th>
-        </tr>
-        <tr class="noBorder">
-            <th>
-                &nbsp;
-            </th>
-            <th *ngFor = "let weekdisplay of totalWeek['weekDays']">
-                {{weekdisplay['date']}}
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let listEvents of events">
-            <td colspan=10>
-                <table cellspacing=0>
-                    <tbody class="subElements hide" (click)="toggleSubElements()">
-                        <tr>
-                            <td>{{listEvents["events"]}}</td>
-                            <td *ngFor="let day of listEvents['days']" class="{{day}}">&nbsp;</td>
-                        </tr>
-                        <tr *ngIf="listEvents['subElements']" class="subElements">
-                            <td colspan=10>
-                                <table cellspacing=0>
-                                    <tbody>
-                                        <tr *ngFor="let subelements of listEvents['subElements']">
-                                            <td>{{subelements["events"]}}</td>
-                                            <td *ngFor="let day of subelements['days']" class="{{day}}">&nbsp;</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="title">
+    <h2 class="weekCalendar" *ngIf="calendarView == 1">Calendar - {{currentWeekNav}}
+        <span class="leftNav" (click)="gotoWeek('prev')"></span>
+        <span class="rightNav" (click)="gotoWeek('next')"></span>
+    </h2>
+
+    <h2 class="monthCalendar" *ngIf="calendarView == 2">Calendar - {{getMonthNameTxt}}
+        <span class="leftNav" (click)="gotoMonth('prev')"></span>
+        <span class="rightNav" (click)="gotoMonth('next')"></span>
+    </h2>
+    <h2 class="yearlyCalendar" *ngIf="calendarView == 3">Calendar - {{currentYear}}
+        <span class="leftNav" (click)="gotoYear('prev')"></span>
+        <span class="rightNav" (click)="gotoYear('next')"></span>
+    </h2>
+    <div class="viewTypeSearch">
+        <ul class="viewType">
+            <li (click)="viewType(1)" [ngClass]="calendarView == 1?'active':''">Week</li>
+            <li (click)="viewType(2)" [ngClass]="calendarView == 2?'active':''">Month</li>
+            <li (click)="viewType(3)" [ngClass]="calendarView == 3?'active':''">Year</li>
+        </ul>
+    </div>
+</div>
+<div class="Weekly" *ngIf="calendarView == 1">
+    <table class="parentWidth" cellspacing=0>
+        <thead>
+            <tr>
+                <th>
+                    <span class="eventName">Events & Activities</span>
+                </th>
+                <th *ngFor = "let weekdisplay of totalWeek['weekDays']">
+                    <span class="events">{{weekdisplay['day']}}</span>
+                </th>
+            </tr>
+            <tr class="noBorder">
+                <th>
+                    &nbsp;
+                </th>
+                <th *ngFor = "let weekdisplay of totalWeek['weekDays']">
+                    <span class="events">{{weekdisplay['date']}}</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let listEvents of events">
+                <td colspan=10>
+                    <table cellspacing=0>
+                        <tbody class="subElements" (click)="toggleSubElements()" [ngClass]="initalSubClass ? 'hide' : ''">
+                            <tr>
+                                <td class="eventName"><span class="eventName">{{listEvents["events"]}}</span></td>
+                                <td *ngFor="let day of listEvents['days']" class="{{day}}">
+                                    <span class="events">&nbsp;</span>
+                                </td>
+                            </tr>
+                            <tr *ngIf="listEvents['subElements']" class="subElements">
+                                <td colspan=10>
+                                    <table cellspacing=0>
+                                        <tbody>
+                                            <tr *ngFor="let subelements of listEvents['subElements']">
+                                                <td class="eventName"><span>{{subelements["events"]}}</span></td>
+                                                <td *ngFor="let day of subelements['days']" class="{{day}}">
+                                                    <span class="events">&nbsp;</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="monthly" *ngIf="calendarView == 2">
+    <table class="parentWidth" cellspacing=0>
+        <thead>
+            <tr>
+                <th>
+                    <span class="eventName">Events & Activities</span>
+                </th>
+                <th *ngFor = "let monthDisplay of getAllMonths['daysName']">
+                    <span class="events">{{monthDisplay}}</span>
+                </th>
+            </tr>
+            <tr class="noBorder">
+                <th>
+                    &nbsp;
+                </th>
+                <th *ngFor = "let monthDisplay of getAllMonths['days']">
+                    <span class="events">{{monthDisplay}}</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let listEvents of events">
+                <td colspan=10>
+                    <table cellspacing=0>
+                        <tbody class="subElements" (click)="toggleSubElements()" [ngClass]="initalSubClass ? 'hide' : ''">
+                            <tr>
+                                <td class="eventName"><span class="eventName">{{listEvents["events"]}}</span></td>
+                                <td *ngFor="let day of listEvents['days']" class="{{day}}">
+                                    <span class="events">&nbsp;</span>
+                                </td>
+                            </tr>
+                            <tr *ngIf="listEvents['subElements']" class="subElements">
+                                <td colspan=10>
+                                    <table cellspacing=0>
+                                        <tbody>
+                                            <tr *ngFor="let subelements of listEvents['subElements']">
+                                                <td class="eventName"><span>{{subelements["events"]}}</span></td>
+                                                <td *ngFor="let day of subelements['days']" class="{{day}}">
+                                                    <span class="events">&nbsp;</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="yearly" *ngIf="calendarView == 3">
+    <table class="parentWidth" cellspacing=0>
+        <thead>
+            <tr>
+                <th>
+                    <span class="eventName">Events & Activities</span>
+                </th>
+                <th *ngFor = "let yearly of currentYearAllMonths">
+                    <span class="events">{{yearly['monthHalfName']}}</span>
+                </th>
+            </tr>
+            <tr class="noBorder">
+                <th>
+                    &nbsp;
+                </th>
+                <th class="weeks" *ngFor = "let monthDisplay of currentYearAllMonths">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td *ngFor="let week of monthDisplay['weeks'];let i = index">w{{i + 1}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let listEvents of events">
+                <td colspan=10>
+                    <table cellspacing=0>
+                        <tbody class="subElements" (click)="toggleSubElements()" [ngClass]="initalSubClass ? 'hide' : ''">
+                            <tr>
+                                <td class="eventName"><span class="eventName">{{listEvents["events"]}}</span></td>
+                                <td *ngFor="let day of listEvents['days']" class="{{day}}">
+                                    <span class="events">&nbsp;</span>
+                                </td>
+                            </tr>
+                            <tr *ngIf="listEvents['subElements']" class="subElements">
+                                <td colspan=10>
+                                    <table cellspacing=0>
+                                        <tbody>
+                                            <tr *ngFor="let subelements of listEvents['subElements']">
+                                                <td class="eventName"><span>{{subelements["events"]}}</span></td>
+                                                <td *ngFor="let day of subelements['days']" class="{{day}}">
+                                                    <span class="events">&nbsp;</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
