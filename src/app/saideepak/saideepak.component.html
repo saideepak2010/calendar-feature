@@ -41,11 +41,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let listEvents of events">
+            <tr *ngFor="let listEvents of events;let i = index">
                 <td colspan=10>
                     <table cellspacing=0>
-                        <tbody class="subElements" (click)="toggleSubElements()" [ngClass]="initalSubClass ? 'hide' : ''">
-                            <tr>
+                        <tbody class="elements" [ngClass]="isActive('weekly'+i,i) ? 'active' : ''">
+                            <tr (click)="toggleSubElements('weekly'+i,i)"  [ngClass]="listEvents['subElements'] ? 'parentElement' : ''">
                                 <td class="eventName"><span class="eventName">{{listEvents["events"]}}</span></td>
                                 <td *ngFor="let day of listEvents['days']" class="{{day}}">
                                     <span class="events">&nbsp;</span>
@@ -93,11 +93,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let listEvents of events">
+            <tr *ngFor="let listEvents of events;let i=index">
                 <td colspan=10>
                     <table cellspacing=0>
-                        <tbody class="subElements" (click)="toggleSubElements()" [ngClass]="initalSubClass ? 'hide' : ''">
-                            <tr>
+                        <tbody class="elements" [ngClass]="isActive('monthly'+i,i) ? 'active' : ''">
+                            <tr (click)="toggleSubElements('monthly'+i,i)" [ngClass]="listEvents['subElements'] ? 'parentElement' : ''">
                                 <td class="eventName"><span class="eventName">{{listEvents["events"]}}</span></td>
                                 <td *ngFor="let day of listEvents['days']" class="{{day}}">
                                     <span class="events">&nbsp;</span>
@@ -151,11 +151,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let listEvents of events">
+            <tr *ngFor="let listEvents of events;let i = index">
                 <td colspan=10>
                     <table cellspacing=0>
-                        <tbody class="subElements" (click)="toggleSubElements()" [ngClass]="initalSubClass ? 'hide' : ''">
-                            <tr>
+                        <tbody class="elements" [ngClass]="isActive('yearly'+i,i) ? 'active' : ''">
+                            <tr (click)="toggleSubElements('yearly'+i,i)" [ngClass]="listEvents['subElements'] ? 'parentElement' : ''">
                                 <td class="eventName"><span class="eventName">{{listEvents["events"]}}</span></td>
                                 <td *ngFor="let day of listEvents['days']" class="{{day}}">
                                     <span class="events">&nbsp;</span>

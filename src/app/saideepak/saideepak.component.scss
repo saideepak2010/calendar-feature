@@ -1,7 +1,8 @@
 $firstchildwidth: 100%;
 $maxWidth: 400px;
 $generalwidth: 10%;
-$paddingLeft: 30px;
+$paddingLeft: 40px;
+$parentpaddingLeft: 30px;
 $paddingRight: 10px;
 @mixin firstChild(){
     text-align: left;
@@ -131,7 +132,59 @@ table{
     tbody{
         tr{
             td{
-                @include firstChild();
+                @include firstChild();                
+                $width: 10px;
+                $height: 3px;
+                $left: 10px;
+                $borderColor: rgb(68,68,68);
+                tbody{
+                    &.elements{
+                        .parentElement{
+                            cursor: pointer;
+                            span.eventName{
+                                position: relative;
+                                padding-left: $parentpaddingLeft;
+                                &:before{
+                                    content: "";
+                                    position: absolute;
+                                    left: $left;
+                                    font-size: 0;
+                                    width: $width;
+                                    height: $height;
+                                    background: $borderColor;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                }
+                            }
+                        }
+                        &.active{
+                            .parentElement{
+                                span.eventName{
+                                    padding-left: $parentpaddingLeft;
+                                    &:after{
+                                        content: "";
+                                        position: absolute;
+                                        left: #{$left + (($width/2))};
+                                        font-size: 0;
+                                        height: $width;
+                                        width: $height;
+                                        background: $borderColor;
+                                        top: 50%;
+                                        transform: translateX(-50%) translateY(-50%);
+                                    }
+                                }
+                            }
+                        }
+                        .subElements{
+                            display: none;
+                        }
+                        &.active{
+                            .subElements{
+                                display: block;
+                            }
+                        }
+                    }
+                }
                 &.eventActive{
                     &:after{
                         background: #cdcdcd;

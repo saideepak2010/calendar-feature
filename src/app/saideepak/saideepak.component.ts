@@ -6,7 +6,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./saideepak.component.scss']
 })
 export class SaideepakComponent implements OnInit {
-  getCurrentDate = new Date("2/27/2019");
+  getCurrentDate = new Date();
   getMonth = this.getCurrentDate; //"01/27/2020"
   getYear = this.getCurrentDate;
   getWeek = this.getCurrentDate;
@@ -21,7 +21,7 @@ export class SaideepakComponent implements OnInit {
   getMonthNameTxt = "";
   currentYear = "";
   currentYearAllMonths = [];
-  initalSubClass: boolean = false;
+  initalSubClass: any = [];
   calendarView = 3;
   constructor() { }
 
@@ -248,10 +248,13 @@ export class SaideepakComponent implements OnInit {
     this.totalWeek = this.appendWeekDates(this.currentWeek['startDate'],this.currentWeek['endDate']);
   }
 
-  toggleSubElements(){
-    this.initalSubClass = true;
+  toggleSubElements(item,index){
+    let match = this.initalSubClass.item == item && this.initalSubClass.index == index;
+    this.initalSubClass = match ? {item: '', index: ''} : {item: item, index: index};
   }
-
+  isActive(item,index){
+    return this.initalSubClass.item === item && this.initalSubClass.index == index;
+  }
   appendClassesEventActive(fromDate,toDate){
     
   }
