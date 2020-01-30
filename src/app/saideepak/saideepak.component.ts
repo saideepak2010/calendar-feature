@@ -15,14 +15,16 @@ export class SaideepakComponent implements OnInit {
   totalWeek;
   currentWeek;
   currentWeekNav = "";
-  events = [];
+  weeklyEvents = [];
+  monthlyEvents = [];
+  yearlyEvents = [];
   monthDays=[];
   monthDates=[];
   getMonthNameTxt = "";
   currentYear = "";
   currentYearAllMonths = [];
   initalSubClass: any = [];
-  calendarView = 3;
+  calendarView = 1;
   constructor() { }
 
   ngOnInit() {
@@ -31,51 +33,173 @@ export class SaideepakComponent implements OnInit {
     this.weeklyCalendarLoad(this.getWeek);
     this.getFullMonth(this.getMonth);
 
-
-    this.events = ([
+    // console.log(this.checkActive("01/27/2020","02/04/2020","01/28/2020"));
+    this.weeklyEvents = ([
       {
         "events":"dummy",
-        "days" : ["eventActive","eventActive","eventActive","eventActive","eventActive","",""],
+        "startDate" : "01/27/2020",
+        "endDate": "02/02/2020",
         "subElements":[
           {
             "events":"dummy1",
-            "days" : ["eventActive","eventActive last","","","","",""]
+            "startDate" : "01/27/2020",
+            "endDate": "01/29/2020"
           },
           {
             "events":"dummy2",
-            "days" : ["","eventActive","eventActive","eventActive","eventActive last","","",]
+            "startDate" : "01/28/2020",
+            "endDate": "01/29/2020"
           },
           {
             "events":"dummy3",
-            "days" : ["","","eventActive","eventActive","eventActive","eventActive","eventActive"]
+            "startDate" : "01/28/2020",
+            "endDate": "01/30/2020"
           }
         ]
       },
       {
         "events":"record",
-        "days" : ["","", "eventActive","eventActive","eventActive","eventActive last",""],
+        "startDate" : "27/01/2020",
+        "endDate": "02/02/2020",
         "subElements":[
           {
             "events":"dummy1",
-            "days" : ["eventActive","eventActive last","","","","",""]
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
           },
           {
             "events":"dummy2",
-            "days" : ["","eventActive","eventActive","eventActive","eventActive last","","",]
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
           },
           {
             "events":"dummy3",
-            "days" : ["","","eventActive","eventActive","eventActive","eventActive last",""]
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
           }
         ]
       },
       {
         "events":"break",
-        "days" : ["","","eventActive","eventActive","eventActive last","",""]
+        "startDate" : "27/01/2020",
+        "endDate": "02/02/2020"
       },
       {
         "events":"sample",
-        "days" : ["","","eventActive","eventActive last","","",""]
+        "startDate" : "27/01/2020",
+        "endDate": "02/02/2020"
+      }
+    ])
+    this.monthlyEvents = ([
+      {
+        "events":"dummy",
+        "startDate" : "01/27/2020",
+        "endDate": "02/02/2020",
+        "subElements":[
+          {
+            "events":"dummy1",
+            "startDate" : "01/27/2020",
+            "endDate": "01/29/2020"
+          },
+          {
+            "events":"dummy2",
+            "startDate" : "01/28/2020",
+            "endDate": "01/29/2020"
+          },
+          {
+            "events":"dummy3",
+            "startDate" : "01/28/2020",
+            "endDate": "01/30/2020"
+          }
+        ]
+      },
+      {
+        "events":"record",
+        "startDate" : "01/01/2020",
+        "endDate": "01/08/2020",
+        "subElements":[
+          {
+            "events":"dummy1",
+            "startDate" : "01/05/2020",
+            "endDate": "02/02/2020"
+          },
+          {
+            "events":"dummy2",
+            "startDate" : "01/04/2020",
+            "endDate": "02/02/2020"
+          },
+          {
+            "events":"dummy3",
+            "startDate" : "01/02/2020",
+            "endDate": "02/02/2020"
+          }
+        ]
+      },
+      {
+        "events":"break",
+        "startDate" : "01/27/2020",
+        "endDate": "02/02/2020"
+      },
+      {
+        "events":"sample",
+        "startDate" : "01/29/2020",
+        "endDate": "02/02/2020"
+      }
+    ])
+    this.yearlyEvents = ([
+      {
+        "events":"dummy",
+        "startDate" : "01/27/2020",
+        "endDate": "02/02/2020",
+        "subElements":[
+          {
+            "events":"dummy1",
+            "startDate" : "01/27/2020",
+            "endDate": "01/29/2020"
+          },
+          {
+            "events":"dummy2",
+            "startDate" : "01/28/2020",
+            "endDate": "01/29/2020"
+          },
+          {
+            "events":"dummy3",
+            "startDate" : "01/28/2020",
+            "endDate": "01/30/2020"
+          }
+        ]
+      },
+      {
+        "events":"record",
+        "startDate" : "27/01/2020",
+        "endDate": "02/02/2020",
+        "subElements":[
+          {
+            "events":"dummy1",
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
+          },
+          {
+            "events":"dummy2",
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
+          },
+          {
+            "events":"dummy3",
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
+          }
+        ]
+      },
+      {
+        "events":"break",
+        "startDate" : "27/01/2020",
+        "endDate": "02/02/2020"
+      },
+      {
+        "events":"sample",
+        "startDate" : "27/01/2020",
+        "endDate": "02/02/2020"
       }
     ])
   }
@@ -93,7 +217,22 @@ export class SaideepakComponent implements OnInit {
         startEndDate['endDate'] = new Date(d.setDate(WeekLast));
     return startEndDate;
   }
-
+  checkActive(startDate,endDate,dateCheck){
+    // dateCheck = this.appendZero(dateCheck);
+    // console.log(dateCheck);
+    startDate = new Date(startDate);
+    endDate = new Date(endDate);
+    var returnValue = false;
+    var arrayDates = this.appendWeekDates(startDate,endDate);
+    arrayDates['weekDays'].find(item => {
+      if(item['fullDate'] == dateCheck)
+      {
+        returnValue = true;
+      }
+    })
+    // console.log(dateCheck);
+    return returnValue;
+  }
   getFullMonth(currentMonth){
     //this.getMonth.getDay() //this.getMonth.getDate()//this.getMonth.getFullYear()
     this.getMonthStart = this.spliceMonth(currentMonth.getMonth())+"/01/"+currentMonth.getFullYear();
@@ -107,11 +246,14 @@ export class SaideepakComponent implements OnInit {
     var days = [];
     var daysName = [];
     var daysList = [];
+    var fullDate = [];
     while (date.getMonth() === month) {
-      days.push((new Date(date)).getDate());
+      days.push(this.appendZero((new Date(date)).getDate()));
       daysName.push(this.getDayName(date.getDay())['halfName']);
+      fullDate.push(this.spliceMonth(month) + "/" + this.appendZero((new Date(date)).getDate()) + "/" + year);
       date.setDate(date.getDate() + 1);
     }
+    daysList['fullDate'] = fullDate;
     daysList['days'] = days;
     daysList['daysName'] = daysName;
     return daysList;
@@ -132,8 +274,6 @@ export class SaideepakComponent implements OnInit {
     return daysOfYear;
   }
 
-  
-
   passMonthYear(year){
     this.currentYear = year;
     var getArray = [];
@@ -148,6 +288,7 @@ export class SaideepakComponent implements OnInit {
       );
     }
     this.currentYearAllMonths = getArray;
+    console.log(this.currentYearAllMonths);
   }
 
   getWeeksStartAndEndInMonth(_year: number, _month: number, returnDate: boolean = false) {

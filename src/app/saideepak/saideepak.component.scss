@@ -92,21 +92,64 @@ $paddingRight: 10px;
 }
 .weekCalendar,.monthCalendar,.yearlyCalendar{
     .leftNav{
+        font-size: 0;
+        vertical-align: middle;
+        line-height: 1;
+        display: inline-block;
+        height: 20px;
+        cursor: pointer;
         &:before{
             content:"";
-            @include arrowDir(10px,#000,"left")
+            @include arrowDir(10px,#000,"left");
+            display: inline-block;
+        }
+        &:after{
+            content:"";
+            @include arrowDir(10px,#fff,"left");
+            display: inline-block;
+            margin-left: -17px;
+            z-index: 2;
+            position: relative;
         }
     }
     .rightNav{
         margin-left: 10px;
+        font-size: 0;
+        vertical-align: middle;
+        line-height: 1;
+        display: inline-block;
+        height: 20px;
+        cursor: pointer;
+        &:after{
+            content:"";
+            @include arrowDir(10px,#000,"right");
+            display: inline-block;
+            z-index: 1;
+            position: relative;
+        }
         &:before{
             content:"";
-            @include arrowDir(10px,#000,"right")
+            @include arrowDir(10px,#fff,"right");
+            display: inline-block;
+            margin-right: -17px;
+            z-index: 2;
+            position: relative;
         }
     }
 }
 .yearly{
     table{
+        thead{
+            tr{
+                .weeksHeader{
+                    & > table
+                    {
+                        table-layout: auto;
+                        width: auto;
+                    }
+                }
+            }
+        }
         thead{
             tr{
                 th{
@@ -124,23 +167,39 @@ $paddingRight: 10px;
                                     &4,&5,&6,&7{
                                         padding-left: 0;
                                         padding-right: 0;
+                                        table{
+                                            width: 100%;
+                                            table-layout: fixed;
+                                        }
                                     }
                                     &4{
                                         width: 100px;
                                         min-width: 100px;
+                                        th{
+                                            width: calc(100% / 4);
+                                        }
                                     }
                                     &5{
                                         width: 140px;
                                         min-width: 140px;
+                                        th{
+                                            width: calc(100% / 5);
+                                        }
                                     }
                                     &6{
                                         width: 160px;
                                         min-width: 160px;
+                                        th{
+                                            width: calc(100% / 6);
+                                        }
                                     }
                                     &7{
                                         width: 180px;
                                         min-width: 180px;
-                                    }    
+                                        th{
+                                            width: calc(100% / 7);
+                                        }
+                                    }  
                                 }
                                 table{
                                     table-layout:auto;
@@ -151,14 +210,63 @@ $paddingRight: 10px;
                 }
             }
         }
+        tbody{
+            tr{
+                td{
+                    &.weeksDisplay{
+                        
+                    }
+                    &.weeksTotal{
+                        &4,&5,&6,&7{
+                            padding-left: 0;
+                            padding-right: 0;
+                        }
+                        &4{
+                            width: 100px;
+                            min-width: 100px;
+                        }
+                        &5{
+                            width: 140px;
+                            min-width: 140px;
+                        }
+                        &6{
+                            width: 160px;
+                            min-width: 160px;
+                        }
+                        &7{
+                            width: 180px;
+                            min-width: 180px;
+                        }
+                         
+                    }
+                    table{
+                        table-layout: auto !important;
+                        width: auto !important;
+                        thead{
+                            th{
+                                padding-left: 0;
+                            }
+                        }
+                        tbody{
+                            td{
+                                padding-left: 0;
+                            }
+                        }
+                    }
+                }
+            }            
+        }
     }
 }
 table{
-    width: 100%;
-    table-layout: fixed;
+    // width: 100%;
+    // table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0px;
     table{
         table-layout: auto;
         width: auto;
+        border: 0;
     }
     thead{
         tr{
@@ -175,9 +283,23 @@ table{
                     }
                 }
             }
+            &:not(.noBorder){
+                th{                
+                    &.eventNameHeader,&.eventNameHeader + th{
+                        border-bottom: 1px solid #cdcdcd;
+                    }
+                }
+            }
         }
     }
     tbody{
+        .elements{
+            .parentElement{
+                .eventNameHeader,.eventNameHeader + td{
+                    // padding-bottom: 10px;
+                }
+            }
+        }
         tr{
             td{
                 @include firstChild();                
@@ -186,6 +308,8 @@ table{
                 $left: 10px;
                 $borderColor: rgb(68,68,68);
                 $borderRadius: 4px;
+                $eventColor: rgb(153,195,249);
+                $activityColor: rgb(198,121,225);
                 tbody{
                     &.elements{
                         .parentElement{
@@ -239,9 +363,9 @@ table{
                         }
                     }
                 }
-                &.eventActive{
+                &.activityActive{
                     &:after{
-                        background: #cdcdcd;
+                        background: $activityColor;
                         content: "";
                         width: 100%;
                         height: 100%;
@@ -266,7 +390,56 @@ table{
                     & + td:not(.eventActive){
                         &:before{
                             content:"";
-                            background: #cdcdcd;
+                            background: $activityColor;
+                            border-radius: 0px $borderRadius $borderRadius 0px;
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            right: calc(100% - 3px);
+                            top: 0;
+                        }
+                    }
+                }
+                &:not(.activityActive){
+                    & + .activityActive{
+                        &:after{
+                            border-radius: $borderRadius 0px 0px $borderRadius;
+                        }
+                        &:last-child{
+                            &:after{
+                                border-radius: $borderRadius;
+                            }
+                        }
+                    }
+                }
+                &.eventActive{
+                    &:after{
+                        background: $eventColor;
+                        content: "";
+                        width: 100%;
+                        height: 100%;
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                    }
+                    &:first-child{
+                        &:after{
+                            border-radius: $borderRadius 0 0 $borderRadius;
+                        }
+                    }
+                    &:last-child{
+                        &:after{
+                            content:"";
+                            border-radius: 0px $borderRadius $borderRadius 0px;
+                        }
+                    }
+                    & + td:not(.eventActive){
+                        &:before{
+                            content:"";
+                            background: $eventColor;
                             border-radius: 0px $borderRadius $borderRadius 0px;
                             width: 100%;
                             height: 100%;
@@ -293,6 +466,9 @@ table{
                     table{
                         width: 100%;
                         table-layout: fixed;
+                        td{
+                            border: 1px solid #cdcdcd;
+                        }
                     }
                 }
             }
@@ -311,10 +487,13 @@ table{
         .viewType{
             display: flex;
             list-style-type: none;
+            justify-content: flex-end;
             li{
                 cursor: pointer;
                 padding: 10px;
                 border: 1px solid #1571ce;
+                padding: 10px 45px;
+                font-weight: bold;
                 &.active{
                     background: #1571ce;
                     color: #fff
