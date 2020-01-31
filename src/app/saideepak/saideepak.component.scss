@@ -391,11 +391,38 @@ table{
         table-layout: auto;
         width: auto;
         border: 0;
+        &.calendarParent{
+            width: 100%;
+        }
     }
     &.parentWidth{
         & > tbody{
             & > tr{
                 border-bottom: 1px solid $overallBorderColor;
+            }
+        }
+    }
+    &.calendarParent{
+        tr{
+            &:not(:last-child){
+                .calendarEventTable{
+                    & > tbody{
+                        border-bottom: 1px solid $overallBorderColor;
+                        tr{
+                            border-bottom: 0;
+                        }
+                    }
+                }
+            }
+            &:last-child{
+                .calendarEventTable{
+                    & > tbody{
+                        border-bottom: 1px dashed #000;
+                        tr{
+                            border-bottom: 0;
+                        }
+                    }
+                }
             }
         }
     }
