@@ -5,6 +5,8 @@ $paddingLeft: 40px;
 $parentpaddingLeft: 30px;
 $parentpaddingRight: 30px;
 $paddingRight: 10px;
+$overallBorderColor: #cdcdcd;
+$activityEventHeight: 17px;
 @mixin firstChild(){
     text-align: left;
     position: relative;
@@ -268,6 +270,13 @@ table{
         width: auto;
         border: 0;
     }
+    &.parentWidth{
+        & > tbody{
+            & > tr{
+                border-bottom: 1px solid $overallBorderColor;
+            }
+        }
+    }
     thead{
         tr{
             th{
@@ -286,7 +295,27 @@ table{
             &:not(.noBorder){
                 th{                
                     &.eventNameHeader,&.eventNameHeader + th{
-                        border-bottom: 1px solid #cdcdcd;
+                        border-bottom: 1px solid $overallBorderColor;
+                    }
+                }
+            }
+            &.noBorder{
+                th{
+                    &.eventNameHeader{
+                        border-right: 1px solid $overallBorderColor;
+                        & + th{
+                            border-right: 1px solid $overallBorderColor;
+                            table{
+                                tr{
+                                    th{
+                                        border-right: 1px solid $overallBorderColor;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &:last-child{
+                        border-right: 0 !important;
                     }
                 }
             }
@@ -297,6 +326,23 @@ table{
             .parentElement{
                 .eventNameHeader,.eventNameHeader + td{
                     // padding-bottom: 10px;
+                }
+            }
+            &:not(.active){
+                tr{
+                    td{
+                        &.eventNameHeader{
+                            // padding-bottom: 35px;
+                            // padding-top: 20px;
+                            // & + td{
+                            //     span{
+                            //         &.events{
+                            //             // padding: 20px 0 40px;
+                            //         }
+                            //     }
+                            // }
+                        }
+                    }
                 }
             }
         }
@@ -310,6 +356,22 @@ table{
                 $borderRadius: 4px;
                 $eventColor: rgb(153,195,249);
                 $activityColor: rgb(198,121,225);
+                &.eventNameHeader{
+                    border-right: 1px solid $overallBorderColor;
+                    & + td{
+                        border-right: 1px solid $overallBorderColor;
+                        table{
+                            tr{
+                                td{
+                                    border-right: 1px solid $overallBorderColor;
+                                }
+                            }
+                        }
+                    }
+                }
+                &:last-child{
+                    border-right: 0 !important;
+                }
                 tbody{
                     &.elements{
                         .parentElement{
@@ -367,14 +429,20 @@ table{
                     &:after{
                         background: $activityColor;
                         content: "";
-                        width: 100%;
-                        height: 100%;
+                        width: calc(100% - 5px);
+                        height: $activityEventHeight;
                         display: inline-block;
                         position: absolute;
                         left: 0;
-                        top: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
                         right: 0;
                         bottom: 0;
+                    }
+                    &:last-child{
+                        &:after{
+                            width: calc(100%);
+                        }                        
                     }
                     &:first-child{
                         &:after{
@@ -387,16 +455,29 @@ table{
                             border-radius: 0px $borderRadius $borderRadius 0px;
                         }
                     }
-                    & + td:not(.eventActive){
+                    & + td.activityActive{
+                        &:before{
+                            content: "";
+                            background: $activityColor;
+                            width: 10px;
+                            height: $activityEventHeight;
+                            position: absolute;
+                            right: calc(100% + 1px);
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                    }
+                    & + td:not(.activityActive){
                         &:before{
                             content:"";
                             background: $activityColor;
                             border-radius: 0px $borderRadius $borderRadius 0px;
-                            width: 100%;
-                            height: 100%;
+                            width: 10px;
+                            height: $activityEventHeight;
                             position: absolute;
-                            right: calc(100% - 3px);
-                            top: 0;
+                            right: calc(100% + 1px);
+                            top: 50%;
+                            transform: translateY(-50%);
                         }
                     }
                 }
@@ -416,14 +497,20 @@ table{
                     &:after{
                         background: $eventColor;
                         content: "";
-                        width: 100%;
-                        height: 100%;
+                        width: calc(100% - 5px);
+                        height: $activityEventHeight;
                         display: inline-block;
                         position: absolute;
                         left: 0;
-                        top: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
                         right: 0;
                         bottom: 0;
+                    }
+                    &:last-child{
+                        &:after{
+                            width: calc(100%);
+                        }                        
                     }
                     &:first-child{
                         &:after{
@@ -436,16 +523,29 @@ table{
                             border-radius: 0px $borderRadius $borderRadius 0px;
                         }
                     }
+                    & + td.eventActive{
+                        &:before{
+                            content: "";
+                            background: $eventColor;
+                            width: 10px;
+                            height: $activityEventHeight;
+                            position: absolute;
+                            right: calc(100% + 1px);
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                    }
                     & + td:not(.eventActive){
                         &:before{
                             content:"";
                             background: $eventColor;
                             border-radius: 0px $borderRadius $borderRadius 0px;
-                            width: 100%;
-                            height: 100%;
+                            width: 10px;
+                            height: $activityEventHeight;
                             position: absolute;
-                            right: calc(100% - 3px);
-                            top: 0;
+                            right: calc(100% + 1px);
+                            top: 50%;
+                            transform: translateY(-50%);
                         }
                     }
                 }
@@ -461,13 +561,65 @@ table{
                         }
                     }
                 }
-                &.eventNameHeader + td{
-                    width: calc(100% - #{$maxWidth - $paddingRight});
-                    table{
-                        width: 100%;
-                        table-layout: fixed;
+                $heightbottom: 20px;
+                $subElementsHeightBottom: 5px;
+                tr{
+                    &.parentElement{
                         td{
-                            border: 1px solid #cdcdcd;
+                            span{
+                                &.events{
+                                    padding: $heightbottom 0;
+                                }
+                            }
+                        }
+                    }
+                    &.singleElement{
+                        td{
+                            span{
+                                &.events{
+                                    padding: $heightbottom 0;
+                                }
+                            }
+                        }
+                    }
+                    &.subElements{
+                        td{
+                            span{
+                                &.events{
+                                    padding: $subElementsHeightBottom 0;
+                                }
+                            }
+                        }
+                    }                                
+                }
+                
+                &.eventNameHeader{
+                    vertical-align: middle;
+                    & + td{
+                        width: calc(100% - #{$maxWidth - $paddingRight});
+                        table{
+                            width: 100%;
+                            table-layout: fixed;
+                            td{
+                                span{
+                                    &.events{
+                                        display: inline-block;
+                                        width: 100%;
+                                        position: relative;
+                                        // &:after{
+                                        //     position: absolute;
+                                        //     bottom: 100%;
+                                        //     content: "";
+                                        //     width: 100%;
+                                        //     height: $heightbottom;
+                                        //     left: 0;
+                                        //     bottom: 0px;
+                                        //     background: #fff;
+                                        //     z-index: 1;
+                                        // }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

@@ -21,7 +21,7 @@
     </div>
 </div>
 <div class="Weekly" *ngIf="calendarView == 1">
-    <table class="parentWidth" cellspacing=0>
+    <table class="parentWidth" cellspacing=0 cellpadding=0>
         <thead>
             <tr>
                 <th class="eventNameHeader">
@@ -59,28 +59,30 @@
         <tbody>
             <tr *ngFor="let listEvents of weeklyEvents;let i = index">
                 <td colspan=2>
-                    <table cellspacing=0>
+                    <table cellspacing=0 cellpadding=0>
                         <tbody class="elements" [ngClass]="isActive('weekly'+i,i) ? 'active' : ''">
-                            <tr (click)="toggleSubElements('weekly'+i,i)"  [ngClass]="listEvents['subElements'] ? 'parentElement' : ''">
+                            <tr (click)="toggleSubElements('weekly'+i,i)"  [ngClass]="listEvents['subElements'] ? 'parentElement' : 'singleElement'">
                                 <td class="eventNameHeader"><span class="eventName">{{listEvents["events"]}}</span></td>
                                 <td>
-                                    <table cellspacing="0">
+                                    <table cellspacing=0 cellpadding=0>
                                         <tbody>
-                                            <td *ngFor="let weekdisplay of totalWeek['weekDays']" [ngClass]='checkActive(listEvents["startDate"],listEvents["endDate"],weekdisplay["fullDate"]) == true ? "eventActive" : ""'>
-                                                <span class="events">&nbsp;</span>
-                                            </td>
+                                            <tr>
+                                                <td *ngFor="let weekdisplay of totalWeek['weekDays']" [ngClass]='checkActive(listEvents["startDate"],listEvents["endDate"],weekdisplay["fullDate"]) == true ? "eventActive" : ""'>
+                                                    <span class="events">&nbsp;</span>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </td>
                             </tr>
                             <tr *ngIf="listEvents['subElements']" class="subElements">
                                 <td colspan=2> <!--  [attr.colspan]="listEvents['subElements'] ? 2 : null" -->
-                                    <table cellspacing=0>
+                                    <table cellspacing=0 cellpadding=0>
                                         <tbody>
                                             <tr *ngFor="let subelements of listEvents['subElements']">
                                                 <td class="eventNameHeader"><span>{{subelements["events"]}}</span></td>
                                                 <td>
-                                                    <table cellspacing="0">
+                                                    <table cellspacing=0 cellpadding=0>
                                                         <tbody>
                                                             <tr>
                                                                 <td  *ngFor="let weekdisplay of totalWeek['weekDays']" [ngClass]='checkActive(subelements["startDate"],subelements["endDate"],weekdisplay["fullDate"]) == true ? "activityActive" : ""'>
@@ -103,7 +105,7 @@
     </table>
 </div>
 <div class="monthly" *ngIf="calendarView == 2">
-    <table class="parentWidth" cellspacing=0>
+    <table class="parentWidth" cellspacing=0 cellpadding=0>
         <thead>
             <tr>
                 <th class="eventNameHeader">
@@ -126,12 +128,12 @@
         <tbody>
             <tr *ngFor="let listEvents of monthlyEvents;let i=index">
                 <td colspan=2>
-                    <table cellspacing=0>
+                    <table cellspacing=0 cellpadding=0>
                         <tbody class="elements" [ngClass]="isActive('monthly'+i,i) ? 'active' : ''">
-                            <tr (click)="toggleSubElements('monthly'+i,i)" [ngClass]="listEvents['subElements'] ? 'parentElement' : ''">
+                            <tr (click)="toggleSubElements('monthly'+i,i)" [ngClass]="listEvents['subElements'] ? 'parentElement' : 'singleElement'">
                                 <td class="eventNameHeader"><span class="eventName">{{listEvents["events"]}}</span></td>
                                 <td>
-                                    <table cellspacing=0>
+                                    <table cellspacing=0 cellpadding=0>
                                         <tbody>
                                             <tr>
                                                 <td *ngFor = "let monthDisplay of getAllMonths['fullDate'];let i = index" [ngClass]='checkActive(listEvents["startDate"],listEvents["endDate"],monthDisplay) == true ? "eventActive" : ""'>
@@ -144,12 +146,12 @@
                             </tr>
                             <tr *ngIf="listEvents['subElements']" class="subElements">
                                 <td colspan=10>
-                                    <table cellspacing=0>
+                                    <table cellspacing=0 cellpadding=0>
                                         <tbody>
                                             <tr *ngFor="let subelements of listEvents['subElements']">
                                                 <td class="eventNameHeader"><span>{{subelements["events"]}} qweqwe</span></td>
                                                 <td>
-                                                    <table cellspacing=0>
+                                                    <table cellspacing=0 cellpadding=0>
                                                         <tbody>
                                                             <tr>
                                                                 <td *ngFor = "let monthDisplay of getAllMonths['fullDate'];let i = index"  [ngClass]='checkActive(subelements["startDate"],subelements["endDate"],monthDisplay) == true ? "activityActive" : ""'>
@@ -172,19 +174,19 @@
     </table>
 </div>
 <div class="yearly" *ngIf="calendarView == 3">
-    <table class="parentWidth" cellspacing=0>
+    <table class="parentWidth" cellspacing=0 cellpadding=0>
         <thead>
             <tr>
                 <th class="eventNameHeader">
                     <span class="eventName">Events & Activities</span>
                 </th>
                 <th class="weeksHeader">
-                    <table cellspacing=0>
+                    <table cellspacing=0 cellpadding=0>
                         <thead>
                             <tr>
                                 <th *ngFor = "let yearly of currentYearAllMonths" class="weeksTotal{{yearly['weeks'].length}}">
                                     <span class="events">{{yearly['monthHalfName']}}</span>
-                                    <table cellspacing=0>
+                                    <table cellspacing=0 cellpadding=0>
                                         <thead>
                                             <tr>
                                                 <th *ngFor="let week of yearly['weeks'];let i = index">
@@ -203,16 +205,16 @@
         <tbody>
             <tr *ngFor="let listEvents of yearlyEvents;let i = index">
                 <td colspan=2>
-                    <table cellspacing=0>
+                    <table cellspacing=0 cellpadding=0>
                         <tbody class="elements" [ngClass]="isActive('yearly'+i,i) ? 'active' : ''">
-                            <tr (click)="toggleSubElements('yearly'+i,i)" [ngClass]="listEvents['subElements'] ? 'parentElement' : ''">
+                            <tr (click)="toggleSubElements('yearly'+i,i)" [ngClass]="listEvents['subElements'] ? 'parentElement' : 'singleElement'">
                                 <td class="eventNameHeader"><span class="eventName">{{listEvents["events"]}}</span></td>
                                 <td class="weeksDisplay">
-                                    <table cellspacing=0>
+                                    <table cellspacing=0 cellpadding=0>
                                         <tbody>
                                             <tr>
                                                 <td *ngFor = "let yearly of currentYearAllMonths" class="weeksTotal{{yearly['weeks'].length}}">
-                                                    <table cellspacing=0>
+                                                    <table cellspacing=0 cellpadding=0>
                                                         <thead>
                                                             <tr>
                                                                 <th *ngFor="let week of yearly['weeks'];let i = index">
@@ -229,12 +231,12 @@
                             </tr>
                             <tr *ngIf="listEvents['subElements']" class="subElements">
                                 <td colspan=10>
-                                    <table cellspacing=0>
+                                    <table cellspacing=0 cellpadding=0>
                                         <tbody>
                                             <tr *ngFor="let subelements of listEvents['subElements']">
                                                 <td class="eventNameHeader"><span>{{subelements["events"]}}</span></td>
                                                 <td>
-                                                    <table cellspacing=0>
+                                                    <table cellspacing=0 cellpadding=0>
                                                         <tbody>
                                                             <tr>
                                                                 <td *ngFor="let day of subelements['days']" class="{{day}}">
