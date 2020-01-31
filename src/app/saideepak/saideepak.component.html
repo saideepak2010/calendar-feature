@@ -1,22 +1,22 @@
 <div class="title">
     <h2 class="weekCalendar" *ngIf="calendarView == 1">Calendar - {{currentWeekNav}}
-        <span class="leftNav" (click)="gotoWeek('prev')"></span>
-        <span class="rightNav" (click)="gotoWeek('next')"></span>
+        <a (keyup.Space)="gotoWeek('prev')" (click)="gotoWeek('prev')" id="gotoPreviousWeekDate" class="leftNav" aria-labelledby="gotoPreviousWeekDate" [attr.tabindex]="viewType(1,1)['week'][1]"></a>
+        <a (keyup.Space)="gotoWeek('next')" class="rightNav" (click)="gotoWeek('next')" id="gotoNextWeekDate" aria-labelledby="week-goNext" aria-labelledby="gotoNextWeekDate" [attr.tabindex]="viewType(1,1)['week'][2]"></a>
     </h2>
 
     <h2 class="monthCalendar" *ngIf="calendarView == 2">Calendar - {{getMonthNameTxt}}
-        <span class="leftNav" (click)="gotoMonth('prev')"></span>
-        <span class="rightNav" (click)="gotoMonth('next')"></span>
+        <a class="leftNav" id="gotoPreviousMonth" aria-labelledby="gotoPreviousMonth" [attr.tabindex]="viewType(1,1)['month'][1]" (keyup.Space)="gotoMonth('prev')" (click)="gotoMonth('prev')"></a>
+        <a class="rightNav" id="gotoNextMonth" aria-labelledby="gotoNextMonth" [attr.tabindex]="viewType(1,1)['month'][2]" (keyup.Space)="gotoMonth('next')" (click)="gotoMonth('next')"></a>
     </h2>
     <h2 class="yearlyCalendar" *ngIf="calendarView == 3">Calendar - {{currentYear}}
-        <span class="leftNav" (click)="gotoYear('prev')"></span>
-        <span class="rightNav" (click)="gotoYear('next')"></span>
+        <a class="leftNav" id="gotoPreviousYear" aria-labelledby="gotoPreviousYear" [attr.tabindex]="viewType(1,1)['year'][1]" (keyup.Space)="gotoYear('prev')" (click)="gotoYear('prev')"></a>
+        <a class="rightNav" id="gotoNextYear" aria-labelledby="gotoNextYear" [attr.tabindex]="viewType(1,1)['year'][1]" (keyup.Space)="gotoYear('next')" (click)="gotoYear('next')"></a>
     </h2>
     <div class="viewTypeSearch">
         <ul class="viewType">
-            <li (click)="viewType(1)" [ngClass]="calendarView == 1?'active':''">Week</li>
-            <li (click)="viewType(2)" [ngClass]="calendarView == 2?'active':''">Month</li>
-            <li (click)="viewType(3)" [ngClass]="calendarView == 3?'active':''">Year</li>
+            <li (click)="viewType(1)" id="gotoWeekTab" aria-labelledby="gotoWeekTab" (keyup.Space)="viewType(1)" [attr.tabindex]="viewType(1,1)['week'][0]" title="Week" [ngClass]="calendarView == 1?'active':''">Week</li>
+            <li (click)="viewType(2)" id="gotoMonthTab" aria-labelledby="gotoMonthTab" (keyup.Space)="viewType(2)" [attr.tabindex]="viewType(1,1)['month'][0]" title="Month" [ngClass]="calendarView == 2?'active':''">Month</li>
+            <li (click)="viewType(3)" id="gotoYearTab" aria-labelledby="gotoYearTab" (keyup.Space)="viewType(3)" [attr.tabindex]="viewType(1,1)['year'][0]" title="Year" [ngClass]="calendarView == 3?'active':''">Year</li>
         </ul>
     </div>
 </div>
@@ -116,7 +116,22 @@
                         <thead>
                             <tr>
                                 <th *ngFor = "let monthDisplay of getAllMonths['daysName'];let i = index">
-                                    <span class="events">{{monthDisplay}}</span><br/>
+                                    <span class="events">{{monthDisplay}}</span>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </th>
+            </tr>
+            <tr class="noBorder">
+                <th class="eventNameHeader">
+                    <span class="eventName">&nbsp;</span>
+                </th>
+                <th>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th *ngFor = "let monthDisplay of getAllMonths['daysName'];let i = index">
                                     <span class="events">{{i + 1}}</span>
                                 </th>
                             </tr>

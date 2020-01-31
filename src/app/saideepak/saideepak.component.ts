@@ -37,8 +37,8 @@ export class SaideepakComponent implements OnInit {
     this.weeklyEvents = ([
       {
         "events":"dummy",
-        "startDate" : "01/27/2020",
-        "endDate": "02/02/2020",
+        "startDate" : "01/28/2020",
+        "endDate": "02/05/2020",
         "subElements":[
           {
             "events":"dummy1",
@@ -82,7 +82,24 @@ export class SaideepakComponent implements OnInit {
       {
         "events":"break",
         "startDate" : "27/01/2020",
-        "endDate": "02/02/2020"
+        "endDate": "02/05/2020",
+        "subElements":[
+          {
+            "events":"dummy1",
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
+          },
+          {
+            "events":"dummy2",
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
+          },
+          {
+            "events":"dummy3",
+            "startDate" : "27/01/2020",
+            "endDate": "02/02/2020"
+          }
+        ]
       },
       {
         "events":"sample",
@@ -93,8 +110,8 @@ export class SaideepakComponent implements OnInit {
     this.monthlyEvents = ([
       {
         "events":"dummy",
-        "startDate" : "01/27/2020",
-        "endDate": "02/02/2020",
+        "startDate" : "01/01/2020",
+        "endDate": "02/05/2020",
         "subElements":[
           {
             "events":"dummy1",
@@ -365,6 +382,7 @@ export class SaideepakComponent implements OnInit {
     // this.currentWeek = this.getWeekStartWeekEnd(this.getMonth);
   }
   gotoWeek(dir){
+    console.log("qwuweu");
     this.currentWeek = this.getWeekStartWeekEnd(this.getWeek);
     var getDateNew = "";
     if(dir == "prev"){
@@ -406,7 +424,26 @@ export class SaideepakComponent implements OnInit {
   appendZero(numberAppend){
     return ("0" + numberAppend).slice(-2)
   }
-  viewType(view){
-    this.calendarView = view;    
+  viewType(view,conditionCheck = null){
+    if(conditionCheck!=1){
+      this.calendarView = view;
+    }
+    var arrayReturn = [];
+    if(view==1){
+      arrayReturn['week'] = [1,2,3];
+      arrayReturn['month'] = [4,5,6];
+      arrayReturn['year'] = [7,8,9];
+    }
+    else if(view==2){
+      arrayReturn['week'] = [7,8,9];
+      arrayReturn['month'] = [1,2,3];
+      arrayReturn['year'] = [4,5,6];
+    }
+    else if(view==3){
+      arrayReturn['week'] = [7,8,9];
+      arrayReturn['month'] = [4,5,6];
+      arrayReturn['year'] = [1,2,3];
+    }
+    return arrayReturn;
   }
 }

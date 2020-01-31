@@ -1,5 +1,5 @@
 $firstchildwidth: 100%;
-$maxWidth: 400px;
+$maxWidth: 300px;
 $generalwidth: 10%;
 $paddingLeft: 40px;
 $parentpaddingLeft: 30px;
@@ -7,6 +7,40 @@ $parentpaddingRight: 30px;
 $paddingRight: 10px;
 $overallBorderColor: #cdcdcd;
 $activityEventHeight: 17px;
+@mixin timeFilter($width){
+    table{        
+        thead{
+            tr{
+                th{
+                    &.eventNameHeader{
+                        & + th{
+                            table{
+                                th{
+                                    width: $width;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    &.eventNameHeader{
+                        & + td{
+                            table{
+                                td{
+                                    width: $width;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 @mixin firstChild(){
     text-align: left;
     position: relative;
@@ -138,6 +172,94 @@ $activityEventHeight: 17px;
             position: relative;
         }
     }
+}
+.Weekly{
+    @include timeFilter(100px);
+    table{
+        thead{
+            tr{
+                th{
+                    th{
+                        padding-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+.monthly{
+    table{
+        thead{
+            .eventNameHeader{
+                position: sticky;
+                left: 10px;
+                background: #fff;
+                z-index: 333;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    width: 10px;
+                    right: 100%;
+                    height: 100%;
+                    top: 0;
+                    background: #fff;
+                }
+                & + th{
+                    padding-left: 3px;
+                }
+            }
+            tr{
+                &.noBorder{
+                    .eventNameHeader{
+                        &:after{
+                            content: "";
+                            position: absolute;
+                            width: 1px;
+                            left: 100%;
+                            height: 100%;
+                            top: 0;
+                            background: $overallBorderColor;
+                        }
+                    }
+                }
+                th{
+                    th{
+                        padding-top: 10px;
+                    }
+                }
+            }
+        }
+        tbody{
+            .eventNameHeader{
+                position: sticky;
+                left: 10px;
+                background: #fff;
+                z-index: 333;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    width: 10px;
+                    right: 100%;
+                    height: 100%;
+                    top: 0;
+                    background: #fff;
+                }
+                &:after{
+                    content: "";
+                    position: absolute;
+                    width: 1px;
+                    left: 100%;
+                    height: 100%;
+                    top: 0;
+                    background: $overallBorderColor;
+                }
+                & + td{
+                    padding-left: 3px;
+                }
+            }
+        }
+    }
+    @include timeFilter(190px);
 }
 .yearly{
     table{
@@ -568,7 +690,7 @@ table{
                         td{
                             span{
                                 &.events{
-                                    padding: $heightbottom 0;
+                                    padding: #{$heightbottom/2} 0 $heightbottom;
                                 }
                             }
                         }
