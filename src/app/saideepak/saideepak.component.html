@@ -207,21 +207,45 @@
 <div class="yearly calendarView" *ngIf="calendarView == 3">
     <table class="parentWidth" cellspacing=0 cellpadding=0>
         <thead>
-            <tr>
+            <tr class="weeksDisplayName">
                 <th class="eventNameHeader">
                     <span class="eventName">Events & Activities</span>
                 </th>
-                <th class="weeksHeader">
+                <th class="weeksHeader" colspan="62">
                     <table cellspacing=0 cellpadding=0>
                         <thead>
                             <tr>
-                                <th *ngFor = "let yearly of currentYearAllMonths" class="weeksTotal{{yearly['weeks'].length}}">
-                                    <span class="events">{{yearly['monthHalfName']}}</span>
+                                <th *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
+                                    <span class="events">{{yearly['monthFullName']}}</span>
                                     <table cellspacing=0 cellpadding=0>
                                         <thead>
                                             <tr>
                                                 <th *ngFor="let week of yearly['weeks'];let i = index">
-                                                    w{{i + 1}}
+                                                    &nbsp;
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </th>
+            </tr>
+            <tr class="weeksDisplayRow">
+                <th class="eventNameHeader">
+                    <span class="eventName">&nbsp;</span>
+                </th>
+                <th class="weeksHeader" colspan="62">
+                    <table cellspacing=0 cellpadding=0>
+                        <thead>
+                            <tr>
+                                <th *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
+                                    <table cellspacing=0 cellpadding=0>
+                                        <thead>
+                                            <tr>
+                                                <th *ngFor="let week of yearly['weeks'];let i = index">                                                    
+                                                    <span class="events">w{{i + 1}}</span>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -240,17 +264,17 @@
                         <tbody class="elements" [ngClass]="isActive('yearly'+i,i) ? 'active' : ''">
                             <tr (click)="toggleSubElements('yearly'+i,i)" [ngClass]="listEvents['subElements'] ? 'parentElement' : 'singleElement'">
                                 <td class="eventNameHeader"><span class="eventName">{{listEvents["events"]}}</span></td>
-                                <td class="weeksDisplay">
+                                <td class="weeksDisplay" colspan="62">
                                     <table cellspacing=0 cellpadding=0>
                                         <tbody>
                                             <tr>
-                                                <td *ngFor = "let yearly of currentYearAllMonths" class="weeksTotal{{yearly['weeks'].length}}">
+                                                <td *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
                                                     <table cellspacing=0 cellpadding=0>
                                                         <thead>
                                                             <tr>
-                                                                <th *ngFor="let week of yearly['weeks'];let i = index">
-                                                                    w{{i + 1}}
-                                                                </th>
+                                                                <td *ngFor="let week of yearly['weeks'];let i = index">
+                                                                    <span class="events">&nbsp;</span>
+                                                                </td>
                                                             </tr>
                                                         </thead>
                                                     </table>
@@ -266,12 +290,20 @@
                                         <tbody>
                                             <tr *ngFor="let subelements of listEvents['subElements']">
                                                 <td class="eventNameHeader"><span>{{subelements["events"]}}</span></td>
-                                                <td>
-                                                    <table cellspacing=0 cellpadding=0>
+                                                <td class="subElementsEventCell">
+                                                    <table cellspacing=0 cellpadding=0 class="subElementsTable">
                                                         <tbody>
                                                             <tr>
-                                                                <td *ngFor="let day of subelements['days']" class="{{day}}">
-                                                                    <span class="events">&nbsp;</span>
+                                                                <td *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
+                                                                    <table cellspacing=0 cellpadding=0>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <td *ngFor="let week of yearly['weeks'];let i = index">
+                                                                                    <span class="events">&nbsp;</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
