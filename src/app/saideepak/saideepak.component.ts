@@ -38,9 +38,6 @@ export class SaideepakComponent implements OnInit {
         "calendarEvents":
         [
           {
-            "qqweqwe":"qweqwee"
-          },
-          {
             "calendarName": "calendar1",
             "eventsList": [
               {
@@ -67,23 +64,23 @@ export class SaideepakComponent implements OnInit {
               },
               {
                 "events":"record",
-                "startDate" : "27/01/2020",
+                "startDate" : "01/27/2020",
                 "endDate": "02/02/2020",
                 "subElements":[
                   {
                     "events":"dummy1",
-                    "startDate" : "27/01/2020",
-                    "endDate": "02/02/2020"
+                    "startDate" : "01/27/2020",
+                    "endDate": "02/10/2020"
                   },
                   {
                     "events":"dummy2",
-                    "startDate" : "27/01/2020",
-                    "endDate": "02/02/2020"
+                    "startDate" : "01/27/2020",
+                    "endDate": "02/10/2020"
                   },
                   {
                     "events":"dummy3",
-                    "startDate" : "27/01/2020",
-                    "endDate": "02/02/2020"
+                    "startDate" : "01/27/2020",
+                    "endDate": "02/10/2020"
                   }
                 ]
               }
@@ -122,62 +119,91 @@ export class SaideepakComponent implements OnInit {
         ]
       }
     ])
-    console.log(this.weeklyEvents);
     
     this.monthlyEvents = ([
       {
-        "events":"dummy",
-        "startDate" : "01/01/2020",
-        "endDate": "02/05/2020",
-        "subElements":[
+        "calendarEvents":
+        [
           {
-            "events":"dummy1",
-            "startDate" : "01/27/2020",
-            "endDate": "01/29/2020"
+            "calendarName": "calendar1",
+            "eventsList": [
+              {
+                "events":"dummy",
+                "startDate" : "01/28/2020",
+                "endDate": "02/29/2020",
+                "subElements":[
+                  {
+                    "events":"dummy1",
+                    "startDate" : "01/31/2020",
+                    "endDate": "02/27/2020"
+                  },
+                  {
+                    "events":"dummy2",
+                    "startDate" : "01/28/2020",
+                    "endDate": "01/29/2020"
+                  },
+                  {
+                    "events":"dummy3",
+                    "startDate" : "01/28/2020",
+                    "endDate": "01/30/2020"
+                  }
+                ]
+              },
+              {
+                "events":"record",
+                "startDate" : "01/27/2020",
+                "endDate": "02/02/2020",
+                "subElements":[
+                  {
+                    "events":"dummy1",
+                    "startDate" : "01/27/2020",
+                    "endDate": "02/10/2020"
+                  },
+                  {
+                    "events":"dummy2",
+                    "startDate" : "01/27/2020",
+                    "endDate": "02/10/2020"
+                  },
+                  {
+                    "events":"dummy3",
+                    "startDate" : "01/27/2020",
+                    "endDate": "02/10/2020"
+                  }
+                ]
+              }
+            ]
           },
           {
-            "events":"dummy2",
-            "startDate" : "01/28/2020",
-            "endDate": "01/29/2020"
-          },
-          {
-            "events":"dummy3",
-            "startDate" : "01/28/2020",
-            "endDate": "01/30/2020"
+            "calendarName": "calendar2",
+            "eventsList": [{
+              "events":"break",
+              "startDate" : "27/01/2020",
+              "endDate": "02/05/2020",
+              "subElements":[
+                {
+                  "events":"dummy1",
+                  "startDate" : "27/01/2020",
+                  "endDate": "02/02/2020"
+                },
+                {
+                  "events":"dummy2",
+                  "startDate" : "27/01/2020",
+                  "endDate": "02/02/2020"
+                },
+                {
+                  "events":"dummy3",
+                  "startDate" : "27/01/2020",
+                  "endDate": "02/02/2020"
+                }
+              ]
+            },
+            {
+              "events":"sample",
+              "startDate" : "27/01/2020",
+              "endDate": "02/02/2020"
+            }]
           }
         ]
-      },
-      {
-        "events":"record",
-        "startDate" : "01/01/2020",
-        "endDate": "01/08/2020",
-        "subElements":[
-          {
-            "events":"dummy1",
-            "startDate" : "01/05/2020",
-            "endDate": "02/02/2020"
-          },
-          {
-            "events":"dummy2",
-            "startDate" : "01/04/2020",
-            "endDate": "02/02/2020"
-          },
-          {
-            "events":"dummy3",
-            "startDate" : "01/02/2020",
-            "endDate": "02/02/2020"
-          }
-        ]
-      },
-      {
-        "events":"break",
-        "startDate" : "01/27/2020",
-        "endDate": "02/02/2020"
-      },
-      {
-        "events":"sample",
-        "startDate" : "01/29/2020",
-        "endDate": "02/02/2020"
       }
     ])
     this.yearlyEvents = ([

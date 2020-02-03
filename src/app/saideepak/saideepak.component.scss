@@ -382,6 +382,10 @@ $activityEventHeight: 17px;
         }
     }
 }
+.calendarView{
+    width: 100%;
+    overflow: auto;
+}
 table{
     // width: 100%;
     // table-layout: fixed;
