@@ -215,7 +215,7 @@
                     <table cellspacing=0 cellpadding=0>
                         <thead>
                             <tr>
-                                <th *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
+                                <th *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}} weekDaysList">
                                     <span class="events">{{yearly['monthFullName']}}</span>
                                     <table cellspacing=0 cellpadding=0>
                                         <thead>
@@ -240,7 +240,7 @@
                     <table cellspacing=0 cellpadding=0>
                         <thead>
                             <tr>
-                                <th *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
+                                <th *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}} weekDaysList">
                                     <table cellspacing=0 cellpadding=0>
                                         <thead>
                                             <tr>

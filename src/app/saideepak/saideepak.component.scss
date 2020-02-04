@@ -18,6 +18,35 @@ $borderRadius: 4px;
                             table{
                                 th{
                                     width: $width;
+                                    &.weekDaysList{
+                                        &.weeksTotal{
+                                            $cellWidth: 74px;
+                                            &4{
+                                                width: #{$cellWidth*4};
+                                            }
+                                            &5{
+                                                width: #{$cellWidth*5};
+                                            }
+                                            &6{
+                                                width: #{$cellWidth*6};
+                                            }
+                                            &7{
+                                                width: #{$cellWidth*7};
+                                            }
+                                            &4,&5,&6,&7{
+                                                table{
+                                                    th{
+                                                        min-width: 73px;
+                                                        width: 73px;
+                                                        &:first-child{
+                                                            min-width: 73px;
+                                                            width: 73px;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -33,13 +62,25 @@ $borderRadius: 4px;
                             table{
                                 td{
                                     width: $width;
+                                    &.weeksTotal{
+                                        &3,&4,&5,&6,&7{
+                                            border-right: 0;
+                                            .weekDaysList{
+                                                border-right: 1px solid $overallBorderColor !important;
+                                            }
+                                        }
+                                    }
                                     &.weekDaysList{
+                                        min-width: 73px;
+                                        width: 73px;
                                         table{
                                             width: 100% !important;
                                             table-layout: fixed !important;
                                             td{
                                                 width: auto;
+                                                width: 10px;
                                                 border: 0;
+                                                min-width: 55px;
                                                 &.activityActive,&.eventActive{
                                                     &:before{
                                                         right: 100%;
@@ -83,6 +124,13 @@ $borderRadius: 4px;
                                                     & + .activityActive{
                                                         &:after{
                                                             border-radius: $borderRadius 0 0 $borderRadius;
+                                                        }
+                                                    }
+                                                }
+                                                &.eventActive{
+                                                    & + td:not(.eventActive){
+                                                        &:before{
+                                                            right: calc(100% - 10px);
                                                         }
                                                     }
                                                 }
