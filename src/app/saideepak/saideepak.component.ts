@@ -32,7 +32,7 @@ export class SaideepakComponent implements OnInit {
     this.passMonthYear(new Date(this.getYear).getFullYear());
     this.weeklyCalendarLoad(this.getWeek);
     this.getFullMonth(this.getMonth);
-    console.log(this.appendWeekDates(new Date("02/01/2020"),new Date("02/29/2020")));
+    // console.log(this.appendWeekDates(new Date("02/01/2020"),new Date("02/29/2020")));
     // console.log(this.checkActive("01/27/2020","02/04/2020","01/28/2020"));
     this.weeklyEvents = ([
       {
@@ -232,23 +232,23 @@ export class SaideepakComponent implements OnInit {
       },
       {
         "events":"record",
-        "startDate" : "27/01/2020",
-        "endDate": "02/02/2020",
+        "startDate" : "01/27/2020",
+        "endDate": "02/29/2020",
         "subElements":[
           {
             "events":"dummy1",
-            "startDate" : "27/01/2020",
+            "startDate" : "01/27/2020",
             "endDate": "02/02/2020"
           },
           {
             "events":"dummy2",
-            "startDate" : "27/01/2020",
-            "endDate": "02/02/2020"
+            "startDate" : "01/27/2020",
+            "endDate": "05/05/2020"
           },
           {
             "events":"dummy3",
-            "startDate" : "27/01/2020",
-            "endDate": "02/02/2020"
+            "startDate" : "01/27/2020",
+            "endDate": "02/10/2020"
           }
         ]
       },
@@ -265,6 +265,12 @@ export class SaideepakComponent implements OnInit {
     ])
   }
 
+  startDateEndDate(start,end,monthNumber,monthYear){
+    // console.log(start);
+    // console.log(end);
+    // console.log(monthNumber);
+    // console.log(monthYear);
+  }
   getWeekStartWeekEnd(d) {
     d = new Date(d);
     var startEndDate = [];
@@ -279,8 +285,6 @@ export class SaideepakComponent implements OnInit {
     return startEndDate;
   }
   checkActive(startDate,endDate,dateCheck){
-    // dateCheck = this.appendZero(dateCheck);
-    // console.log(dateCheck);
     startDate = new Date(startDate);
     endDate = new Date(endDate);
     var returnValue = false;
@@ -291,7 +295,6 @@ export class SaideepakComponent implements OnInit {
         returnValue = true;
       }
     })
-    // console.log(dateCheck);
     return returnValue;
   }
   getFullMonth(currentMonth){
@@ -341,10 +344,13 @@ export class SaideepakComponent implements OnInit {
     for(let i=0;i<=11;i++){
       getArray.push(
         {
+          monthNumber: i,
+          monthYear: year,
           monthFullName: this.getMonthName(i)['fullName'],
           monthHalfName: this.getMonthName(i)['halfName'],
           monthLetter: this.getMonthName(i)['letter'],
-          weeks: this.getWeeksYear(year, i),
+          weeks: this.getWeeksYear(year, i)['totalArray'],
+          weeksList: this.getWeeksYear(year, i)['totalWeeksArray'],
           calendarWeeks: this.getWeeksStartAndEndInMonth(year, i)
         }
       );
@@ -361,20 +367,29 @@ export class SaideepakComponent implements OnInit {
     month = month+1;
     var getTotalWeeks = new Date(year, month, 0).getDate();
     var totalArray = [];
+    var totalWeeksArray = [];
+    var returnArray = [];
     var totalWeeks = Math.ceil(getTotalWeeks/7);
-    var lastDay = 0;
+    var startDay = 0;
     for(let i=1;i<=totalWeeks;i++){
-      var newLastDay = lastDay+7;
+      var lastDay = startDay+7;
       if(i==totalWeeks){
-        newLastDay = getTotalWeeks;
+        lastDay = getTotalWeeks;
       }
-      totalArray.push({
-        'start': lastDay+1,
-        'end': newLastDay
+      totalWeeksArray.push({
+        'start': this.appendZero(month)+"/"+this.appendZero(startDay+1)+"/"+year,
+        'end': this.appendZero(month)+"/"+this.appendZero(lastDay)+"/"+year
       })
-      lastDay = i*7;
+      var newArray = [];
+      for(let n=startDay+1;n<=lastDay;n++){
+        newArray.push(this.appendZero(month)+"/"+this.appendZero(n)+"/"+year)
+      }
+      totalArray.push(newArray);
+      startDay = i*7;
     }
-    return totalArray;
+    returnArray['totalArray'] = totalArray;
+    returnArray['totalWeeksArray'] = totalWeeksArray;
+    return returnArray;
   }
   getWeeksStartAndEndInMonth(_year: number, _month: number, returnDate: boolean = false) {
     const lastDay = new Date(_year, _month + 1, 0);

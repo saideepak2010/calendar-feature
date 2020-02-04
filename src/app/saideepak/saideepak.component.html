@@ -272,8 +272,16 @@
                                                     <table cellspacing=0 cellpadding=0>
                                                         <thead>
                                                             <tr>
-                                                                <td *ngFor="let week of yearly['weeks'];let i = index">
-                                                                    <span class="events">&nbsp;</span>
+                                                                <td class="weekDaysList" *ngFor="let week of yearly['weeks'];let i = index">
+                                                                    <table cellspacing=0 cellpadding=0>
+                                                                        <tbody>                            
+                                                                            <tr>
+                                                                                <td *ngFor="let weekDays of week"  [ngClass]='checkActive(listEvents["startDate"],listEvents["endDate"],weekDays) == true ? "eventActive" : ""'>
+                                                                                    <span class="events">&nbsp;</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
                                                                 </td>
                                                             </tr>
                                                         </thead>
@@ -298,8 +306,16 @@
                                                                     <table cellspacing=0 cellpadding=0>
                                                                         <thead>
                                                                             <tr>
-                                                                                <td *ngFor="let week of yearly['weeks'];let i = index">
-                                                                                    <span class="events">&nbsp;</span>
+                                                                                <td class="weekDaysList" *ngFor="let week of yearly['weeks'];let i = index">
+                                                                                    <table cellspacing=0 cellpadding=0>
+                                                                                        <tbody>                            
+                                                                                            <tr>
+                                                                                                <td *ngFor="let weekDays of week" [ngClass]='checkActive(subelements["startDate"],subelements["endDate"],weekDays) == true ? "activityActive" : ""'>
+                                                                                                    <span class="events">&nbsp;</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
                                                                                 </td>
                                                                             </tr>
                                                                         </thead>
