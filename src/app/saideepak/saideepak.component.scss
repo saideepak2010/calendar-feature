@@ -73,6 +73,7 @@ $borderRadius: 4px;
                                     &.weekDaysList{
                                         min-width: 73px;
                                         width: 73px;
+                                        max-width: 73px;
                                         table{
                                             width: 100% !important;
                                             table-layout: fixed !important;
@@ -80,7 +81,7 @@ $borderRadius: 4px;
                                                 width: auto;
                                                 width: 10px;
                                                 border: 0;
-                                                min-width: 55px;
+                                                min-width: 10px;
                                                 &.activityActive,&.eventActive{
                                                     &:before{
                                                         right: 100%;
@@ -122,6 +123,20 @@ $borderRadius: 4px;
                                                 }
                                                 &:not(.activityActive){
                                                     & + .activityActive{
+                                                        &:after{
+                                                            border-radius: $borderRadius 0 0 $borderRadius;
+                                                        }
+                                                    }
+                                                }
+                                                &.eventActive{
+                                                    &.startDate{
+                                                        &:after{
+                                                            border-radius: $borderRadius 0 0 $borderRadius;
+                                                        }
+                                                    }
+                                                }
+                                                &.activityActive{                                                    
+                                                    &.startDate{
                                                         &:after{
                                                             border-radius: $borderRadius 0 0 $borderRadius;
                                                         }
@@ -314,6 +329,12 @@ $borderRadius: 4px;
                         padding-top: 10px;
                     }
                 }
+            }
+        }
+        .subElements{
+            table{
+                width: 100%;
+                table-layout: fixed;
             }
         }
     }

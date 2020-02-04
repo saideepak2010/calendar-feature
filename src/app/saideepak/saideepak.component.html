@@ -276,7 +276,7 @@
                                                                     <table cellspacing=0 cellpadding=0>
                                                                         <tbody>                            
                                                                             <tr>
-                                                                                <td *ngFor="let weekDays of week"  [ngClass]='checkActive(listEvents["startDate"],listEvents["endDate"],weekDays) == true ? "eventActive" : ""'>
+                                                                                <td *ngFor="let weekDays of week"  [ngClass]='{"eventActive":checkActive(listEvents["startDate"],listEvents["endDate"],weekDays) == true,"startDate":listEvents["startDate"]==weekDays}'>
                                                                                     <span class="events">&nbsp;</span>
                                                                                 </td>
                                                                             </tr>
@@ -310,7 +310,7 @@
                                                                                     <table cellspacing=0 cellpadding=0>
                                                                                         <tbody>                            
                                                                                             <tr>
-                                                                                                <td *ngFor="let weekDays of week" [ngClass]='checkActive(subelements["startDate"],subelements["endDate"],weekDays) == true ? "activityActive" : ""'>
+                                                                                                <td *ngFor="let weekDays of week" [ngClass]='{"activityActive":checkActive(subelements["startDate"],subelements["endDate"],weekDays) == true,"startDate":subelements["startDate"]==weekDays}'>
                                                                                                     <span class="events">&nbsp;</span>
                                                                                                 </td>
                                                                                             </tr>

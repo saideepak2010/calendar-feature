@@ -210,7 +210,7 @@ export class SaideepakComponent implements OnInit {
     this.yearlyEvents = ([
       {
         "events":"dummy",
-        "startDate" : "01/27/2020",
+        "startDate" : "01/22/2020",
         "endDate": "02/02/2020",
         "subElements":[
           {
@@ -356,7 +356,6 @@ export class SaideepakComponent implements OnInit {
       );
     }
     this.currentYearAllMonths = getArray;
-    console.log(this.currentYearAllMonths);
   }
 
   loopWeeks(weekStart,weekEnd){
