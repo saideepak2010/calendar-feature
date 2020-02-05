@@ -472,7 +472,7 @@ $borderRadius: 4px;
                         content: "";
                         position: absolute;
                         width: 1px;
-                        left: 100%;
+                        left: calc(100% - 1px);
                         height: 100%;
                         top: 0;
                         background: $overallBorderColor;
@@ -528,6 +528,7 @@ $borderRadius: 4px;
                 position: absolute;
                 width: 1px;
                 left: 100%;
+                left: calc(100% - 1px);
                 height: 100%;
                 top: 0;
                 background: $overallBorderColor;
@@ -711,7 +712,7 @@ $borderRadius: 4px;
             .eventNameHeader{
                 position: sticky;
                 position: -webkit-sticky;
-                left: 3px;
+                left: 1px;
                 background: #fff;
                 z-index: 333;
                 &:before{
@@ -752,7 +753,8 @@ $borderRadius: 4px;
             .eventNameHeader{
                 position: sticky;
                 position: -webkit-sticky;
-                left: 3px;
+                // left: 3px;
+                left: 1px;
                 background: #fff;
                 z-index: 333;
                 &:before{
@@ -769,6 +771,7 @@ $borderRadius: 4px;
                     position: absolute;
                     width: 1px;
                     left: 100%;
+                    left: calc(100% - 1px);
                     height: 100%;
                     top: 0;
                     background: $overallBorderColor;

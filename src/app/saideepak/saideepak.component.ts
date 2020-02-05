@@ -284,9 +284,11 @@ export class SaideepakComponent implements OnInit {
         startEndDate['endDate'] = new Date(d.setDate(WeekLast));
     return startEndDate;
   }
-  checkActive(startDate,endDate,dateCheck){
+  checkActive(startDate,endDate,dateCheck,type="eventActive",view){
     startDate = new Date(startDate);
     endDate = new Date(endDate);
+    var returnStatus=[];
+    var classes = "";
     if(startDate.getFullYear()<new Date(dateCheck).getFullYear()){
       startDate = new Date("01/01/"+new Date(dateCheck).getFullYear());
     }
@@ -294,14 +296,25 @@ export class SaideepakComponent implements OnInit {
       endDate = new Date("12/31/"+new Date(dateCheck).getFullYear());
     }
     var returnValue = false;
+    if(this.getDateFormat(startDate) == (this.getDateFormat(dateCheck)))
+    {
+      classes = classes+" startDate"
+    }
+    if(this.getDateFormat(endDate) == (this.getDateFormat(dateCheck)))
+    {
+      classes = classes+" endDate"
+    }
     var arrayDates = this.appendWeekDates(startDate,endDate);
     arrayDates['weekDays'].find(item => {
       if(item['fullDate'] == dateCheck)
       {
         returnValue = true;
+        classes=classes+" "+type;
       }
     })
-    return returnValue;
+    returnStatus['returnValue'] = returnValue;    
+    returnStatus['returnClasses'] = classes;
+    return returnStatus;
   }
   getFullMonth(currentMonth){
     //this.getMonth.getDay() //this.getMonth.getDate()//this.getMonth.getFullYear()
