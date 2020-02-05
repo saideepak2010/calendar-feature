@@ -775,6 +775,15 @@ $borderRadius: 4px;
                 }
                 & + td{
                     padding-left: 3px;
+                    &.subElementsEventCell{
+                        width: calc(100% - 290px);
+                        table{
+                            &.subElementsTable{
+                                table-layout: auto !important;
+                                width: auto !important;
+                            }
+                        }
+                    }
                 }
             }
         }

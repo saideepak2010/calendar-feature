@@ -232,23 +232,23 @@ export class SaideepakComponent implements OnInit {
       },
       {
         "events":"record",
-        "startDate" : "01/27/2020",
-        "endDate": "02/29/2020",
+        "startDate" : "01/27/2019",
+        "endDate": "02/28/2025",
         "subElements":[
           {
             "events":"dummy1",
             "startDate" : "01/27/2020",
-            "endDate": "02/02/2020"
+            "endDate": "02/02/2025"
           },
           {
             "events":"dummy2",
             "startDate" : "01/27/2020",
-            "endDate": "05/05/2020"
+            "endDate": "02/05/2020"
           },
           {
             "events":"dummy3",
             "startDate" : "01/27/2020",
-            "endDate": "02/10/2020"
+            "endDate": "02/11/2025"
           }
         ]
       },
@@ -287,6 +287,12 @@ export class SaideepakComponent implements OnInit {
   checkActive(startDate,endDate,dateCheck){
     startDate = new Date(startDate);
     endDate = new Date(endDate);
+    if(startDate.getFullYear()<new Date(dateCheck).getFullYear()){
+      startDate = new Date("01/01/"+new Date(dateCheck).getFullYear());
+    }
+    if(endDate.getFullYear()>new Date(dateCheck).getFullYear()){
+      endDate = new Date("12/31/"+new Date(dateCheck).getFullYear());
+    }
     var returnValue = false;
     var arrayDates = this.appendWeekDates(startDate,endDate);
     arrayDates['weekDays'].find(item => {
@@ -464,7 +470,6 @@ export class SaideepakComponent implements OnInit {
     // this.currentWeek = this.getWeekStartWeekEnd(this.getMonth);
   }
   gotoWeek(dir){
-    console.log("qwuweu");
     this.currentWeek = this.getWeekStartWeekEnd(this.getWeek);
     var getDateNew = "";
     if(dir == "prev"){
