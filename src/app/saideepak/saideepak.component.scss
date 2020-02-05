@@ -10,6 +10,7 @@ $activityEventHeight: 17px;
 $borderRadius: 4px;
 $weekSpacingRight: 50px;
 $weekCellWidth: 50px;
+$borderBottom: 1px dashed #000;
 @mixin timeFilter($width){
     table{        
         thead{
@@ -721,6 +722,20 @@ $weekCellWidth: 50px;
                 }
             }            
         }
+        &.parentWidth{
+            & > tbody{
+                & > tr{
+                    border-bottom: $borderBottom;
+                    .calendarParent{
+                        & > tbody{
+                            & > tr{
+                                border-bottom: 1px solid $overallBorderColor;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     table{
@@ -848,7 +863,7 @@ table{
             &:last-child{
                 .calendarEventTable{
                     & > tbody{
-                        border-bottom: 1px dashed #000;
+                        border-bottom: $borderBottom;
                         tr{
                             border-bottom: 0;
                         }

@@ -258,48 +258,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let listEvents of yearlyEvents;let i = index">
+            <tr *ngFor="let calendarEvents of yearlyEvents[0]['calendarEvents'];let i=index">
                 <td colspan=2>
-                    <table cellspacing=0 cellpadding=0>
-                        <tbody class="elements" [ngClass]="isActive('yearly'+i,i) ? 'active' : ''">
-                            <tr (click)="toggleSubElements('yearly'+i,i)" [ngClass]="listEvents['subElements'] ? 'parentElement' : 'singleElement'">
-                                <td class="eventNameHeader"><span class="eventName">{{listEvents["events"]}}</span></td>
-                                <td class="weeksDisplay" colspan="62">
+                    <table class="calendarParent" cellspacing=0 cellpadding=0>
+                        <tbody>                            
+                            <tr *ngFor="let listEvents of calendarEvents['eventsList'];let j = index">
+                                <td colspan=2>
                                     <table cellspacing=0 cellpadding=0>
-                                        <tbody>
-                                            <tr>
-                                                <td *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
+                                        <tbody class="elements" [ngClass]="isActive('yearly'+i+'calendar'+j,j) ? 'active' : ''">
+                                            <tr (click)="toggleSubElements('yearly'+i+'calendar'+j,j)" [ngClass]="listEvents['subElements'] ? 'parentElement' : 'singleElement'">
+                                                <td class="eventNameHeader"><span class="eventName">{{listEvents["events"]}}</span></td>
+                                                <td class="weeksDisplay" colspan="62">
                                                     <table cellspacing=0 cellpadding=0>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="weekDaysList" *ngFor="let week of yearly['weeks'];let i = index">
-                                                                    <table cellspacing=0 cellpadding=0>
-                                                                        <tbody>                            
-                                                                            <tr>
-                                                                                <td *ngFor="let weekDays of week" class='{{checkActive(listEvents["startDate"],listEvents["endDate"],weekDays,"eventActive","year")["returnClasses"]}}'>
-                                                                                    <span class="events">&nbsp;</span>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr *ngIf="listEvents['subElements']" class="subElements">
-                                <td colspan=10>
-                                    <table cellspacing=0 cellpadding=0>
-                                        <tbody>
-                                            <tr *ngFor="let subelements of listEvents['subElements']">
-                                                <td class="eventNameHeader"><span>{{subelements["events"]}}</span></td>
-                                                <td class="subElementsEventCell">
-                                                    <table cellspacing=0 cellpadding=0 class="subElementsTable">
                                                         <tbody>
                                                             <tr>
                                                                 <td *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
@@ -310,9 +280,8 @@
                                                                                     <table cellspacing=0 cellpadding=0>
                                                                                         <tbody>                            
                                                                                             <tr>
-                                                                                                <td *ngFor="let weekDays of week" class='{{checkActive(listEvents["startDate"],listEvents["endDate"],weekDays,"activityActive","yearSub")["returnClasses"]}}'>
+                                                                                                <td *ngFor="let weekDays of week" class='{{checkActive(listEvents["startDate"],listEvents["endDate"],weekDays,"eventActive","year")["returnClasses"]}}'>
                                                                                                     <span class="events">&nbsp;</span>
-                                                                                                    <!-- <span>{{listEvents["startDate"]}} to {{listEvents["endDate"]}}</span> -->
                                                                                                 </td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -325,7 +294,46 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                </td>                                                
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="listEvents['subElements']" class="subElements">
+                                                <td colspan=10>
+                                                    <table cellspacing=0 cellpadding=0>
+                                                        <tbody>
+                                                            <tr *ngFor="let subelements of listEvents['subElements']">
+                                                                <td class="eventNameHeader"><span>{{subelements["events"]}}</span></td>
+                                                                <td class="subElementsEventCell">
+                                                                    <table cellspacing=0 cellpadding=0 class="subElementsTable">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td *ngFor = "let yearly of currentYearAllMonths" [attr.colspan]="yearly['weeks'].length" class="weeksTotal{{yearly['weeks'].length}}">
+                                                                                    <table cellspacing=0 cellpadding=0>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td class="weekDaysList" *ngFor="let week of yearly['weeks'];let i = index">
+                                                                                                    <table cellspacing=0 cellpadding=0>
+                                                                                                        <tbody>                            
+                                                                                                            <tr>
+                                                                                                                <td *ngFor="let weekDays of week" class='{{checkActive(listEvents["startDate"],listEvents["endDate"],weekDays,"activityActive","yearSub")["returnClasses"]}}'>
+                                                                                                                    <span class="events">&nbsp;</span>
+                                                                                                                    <!-- <span>{{listEvents["startDate"]}} to {{listEvents["endDate"]}}</span> -->
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>                                                
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
