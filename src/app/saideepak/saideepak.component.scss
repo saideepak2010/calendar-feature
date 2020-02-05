@@ -8,6 +8,8 @@ $paddingRight: 10px;
 $overallBorderColor: #cdcdcd;
 $activityEventHeight: 17px;
 $borderRadius: 4px;
+$weekSpacingRight: 50px;
+$weekCellWidth: 50px;
 @mixin timeFilter($width){
     table{        
         thead{
@@ -33,14 +35,17 @@ $borderRadius: 4px;
                                             &7{
                                                 width: #{$cellWidth*7};
                                             }
-                                            &4,&5,&6,&7{
+                                            &4,&5,&6,&7{                                                
+                                                &:not(:last-child){
+                                                    padding-right: $weekSpacingRight;
+                                                }
                                                 table{
                                                     th{
-                                                        min-width: 73px;
-                                                        width: 73px;
+                                                        min-width: $weekCellWidth;
+                                                        width: $weekCellWidth;
                                                         &:first-child{
-                                                            min-width: 73px;
-                                                            width: 73px;
+                                                            min-width: $weekCellWidth;
+                                                            width: $weekCellWidth;
                                                         }
                                                     }
                                                 }
@@ -65,15 +70,18 @@ $borderRadius: 4px;
                                     &.weeksTotal{
                                         &3,&4,&5,&6,&7{
                                             border-right: 0;
+                                            &:not(:last-child){
+                                                padding-right: $weekSpacingRight;
+                                            }
                                             .weekDaysList{
                                                 border-right: 1px solid $overallBorderColor !important;
                                             }
                                         }
                                     }
                                     &.weekDaysList{
-                                        min-width: 73px;
-                                        width: 73px;
-                                        max-width: 73px;
+                                        min-width: $weekCellWidth;
+                                        width: $weekCellWidth;
+                                        max-width: $weekCellWidth;
                                         table{
                                             width: 100% !important;
                                             table-layout: fixed !important;
@@ -649,6 +657,14 @@ $borderRadius: 4px;
                     }
                     &:not(:first-child){
                         padding-left: 30px;
+                    }
+                }
+                &.weeksDisplayRow{
+                    .eventNameHeader{
+                        border-bottom: 0;
+                    }
+                    .weeksHeader{
+                        border-bottom: 0;
                     }
                 }
             }
